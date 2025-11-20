@@ -1,0 +1,371 @@
+/* ============== Variables (compatibles con Login/Register) ============== */
+:root {
+  --brand-purple: var(--login-primary, #7c3aed);
+  --brand-purple-dark: var(--login-primary-dark, #6d28d9);
+  --brand-blue: var(--login-accent, #3b82f6);
+
+  --text-dark: #0f172a;
+  --text-gray: #475569;
+  --text-muted: #94a3b8;
+
+  --border: #e2e8f0;
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  --shadow-lg: 0 18px 40px -20px rgba(16, 24, 40, 0.4);
+}
+
+/* ======= Layout ======= */
+.user-profile {
+  position: relative;
+  z-index: 1; /* encima de radiales del layout */
+}
+
+.profile-header {
+  background: transparent;
+  padding: 0.5rem 0 1rem;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand-purple), var(--brand-blue));
+  overflow: hidden;
+}
+.profile-avatar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.6);
+  pointer-events: none;
+}
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+}
+.profile-header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ======= Card / Form ======= */
+.profile-content {
+  margin-top: 0.5rem;
+}
+
+/* Card más ancha y centrada */
+.profile-form {
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(231, 234, 240, 0.9);
+  border-radius: var(--radius-lg);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  backdrop-filter: saturate(140%) blur(12px);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(124, 58, 237, 0.04);
+  padding: 1.25rem;
+  max-width: 1120px;          /* más ancha */
+  margin: 0 auto;              /* centrada */
+}
+
+/* Distribución 2 columnas en desktop sin tocar JSX */
+@media (min-width: 1024px) {
+  .profile-form {
+    display: grid;
+    grid-template-columns: 380px 1fr; /* columna izquierda más cómoda */
+    gap: 1.25rem 1.25rem;
+    grid-template-areas:
+      "photo account"
+      "photo password"
+      "photo actions";
+  }
+  /* 1: Foto */
+  .profile-form .form-section:nth-of-type(1) { grid-area: photo; }
+  /* 2: Cuenta */
+  .profile-form .form-section:nth-of-type(2) { grid-area: account; }
+  /* 3: Password */
+  .profile-form .form-section:nth-of-type(3) { grid-area: password; }
+  /* Acciones (btn) */
+  .profile-form .form-actions { grid-area: actions; }
+}
+
+/* Secciones */
+.form-section + .form-section { margin-top: 1rem; }
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-dark);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+.section-title-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  color: var(--brand-purple);
+}
+.section-title-icon svg { width: 100%; height: 100%; display: block; }
+
+/* ======= Foto de perfil (columna izquierda) ======= */
+.photo-upload-section {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* En columna lateral: apila preview y controles */
+@media (min-width: 1024px) {
+  .profile-form .form-section:nth-of-type(1) .photo-upload-section {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+.photo-preview {
+  width: 112px;
+  height: 112px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(59,130,246,0.12));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(231, 234, 240, 0.9);
+}
+
+/* Aumenta la preview en pantallas amplias */
+@media (min-width: 1280px) {
+  .profile-form .form-section:nth-of-type(1) .photo-preview {
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .profile-form .form-section:nth-of-type(1) .photo-preview {
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
+  }
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.preview-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.photo-upload-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.photo-upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-gray);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, transform 0.06s ease;
+}
+.photo-upload-label svg,
+.photo-upload-label .icon,
+.section-title .icon-18 {
+  width: 18px;
+  height: 18px;
+}
+.photo-upload-label:hover {
+  border-color: rgba(124, 58, 237, 0.4);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+  color: var(--text-dark);
+}
+.photo-upload-label:active { transform: translateY(1px); }
+.photo-upload-label.is-loading { pointer-events: none; opacity: 0.8; }
+.photo-input { display: none; }
+
+.form-hint {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+/* ======= Campos ======= */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+.form-group label {
+  color: var(--text-gray);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  height: 44px;
+  padding: 0.75rem 0.9rem;
+  border: 1.4px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.66);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.form-group input:focus {
+  outline: none;
+  border-color: var(--brand-purple);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.14);
+  background: rgba(255,255,255,0.9);
+}
+
+/* Apariencia de campo no editable para email */
+.form-group input[readonly],
+.form-group input.non-editable {
+  background: #f6f7fb;
+  color: var(--text-gray);
+  cursor: default;
+}
+.form-group input[readonly]:focus {
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+/* Información de Cuenta: campos en 2 columnas */
+@media (min-width: 640px) {
+  .profile-form .form-section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem 0.9rem;
+    align-items: start;
+  }
+  .profile-form .form-section:nth-of-type(2) .section-title {
+    grid-column: 1 / -1;         /* el título ocupa todo el ancho */
+    margin-bottom: 0.25rem;
+  }
+  /* Ajusta el espaciado de cada form-group en grid */
+  .profile-form .form-section:nth-of-type(2) .form-group {
+    margin-bottom: 0; /* ya controlado por gap del grid */
+  }
+}
+
+/* Cambiar Contraseña: una columna, pero con buen respiro */
+.profile-form .form-section:nth-of-type(3) .form-group { margin-bottom: 0.4rem; }
+
+/* ======= Acciones ======= */
+.form-actions {
+  margin-top: 1rem;
+}
+@media (min-width: 1024px) {
+  .form-actions { align-self: end; }
+}
+.profile-btn {
+  width: 100%;
+  height: 46px !important;
+  border-radius: var(--radius) !important;
+  background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-purple-dark) 100%) !important;
+  color: #fff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  box-shadow: 0 12px 28px -14px rgba(124, 58, 237, 0.55);
+}
+.profile-btn:hover:not(:disabled) {
+  box-shadow:
+    0 16px 32px -16px rgba(124, 58, 237, 0.6),
+    0 0 0 2px rgba(124, 58, 237, 0.08) inset;
+}
+
+/* Ícono dentro del botón */
+.btn-icon { width: 18px; height: 18px; }
+.btn-icon svg { width: 100%; height: 100%; display: block; }
+
+/* ======= Utilidades (íconos y spinner) ======= */
+.icon-18 { width: 18px; height: 18px; color: currentColor; }
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ======= Accesibilidad ======= */
+.photo-upload-label:focus-visible,
+.profile-btn:focus-visible,
+.form-group input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.18);
+  border-radius: 10px;
+}
+
+/* ======= Responsive refinements ======= */
+@media (max-width: 900px) {
+  .profile-form { padding: 1rem; }
+  .section-title { font-size: 1rem; }
+}
+
+@media (max-width: 700px) {
+  .header-content { align-items: flex-start; gap: 0.75rem; }
+  .profile-avatar { width: 56px; height: 56px; }
+  .photo-preview { width: 100%; max-width: 240px; }
+  .photo-upload-section { grid-template-columns: 1fr; gap: 0.75rem; }
+}
+
+@media (max-width: 560px) {
+  .profile-form { border-radius: 14px; }
+  .section-title { margin-bottom: 0.6rem; }
+  .form-group input { height: 42px; }
+}
+
+
+
+
+
+
+/* Hace que el contenido no quede pegado a los bordes del fondo */
+.user-profile {
+  padding: 24px;
+}
+
+/* Mejor legibilidad sobre el wallpaper */
+.profile-header,
+.profile-content {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 16px;
+}
+
+/* Si ya tenías colores sólidos para estas secciones, puedes suavizarlos
+   o eliminar sus backgrounds previos para que se vea el fondo */

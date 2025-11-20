@@ -1,0 +1,390 @@
+/* =========================================
+   Login - Fondo gradiente animado + olas
+   ========================================= */
+
+/* Variables */
+:root {
+  --login-primary: #7c3aed;
+  --login-primary-dark: #6d28d9;
+  --login-accent: #3b82f6;
+
+  --purple-rgb: 124, 58, 237;
+  --blue-rgb: 59, 130, 246;
+
+  --bg: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --border-color: #e2e8f0;
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  --shadow-lg: 0 18px 40px -20px rgba(16, 24, 40, 0.4);
+}
+
+*, ::before, ::after { box-sizing: border-box; }
+
+/* Contenedor (sin fondos, para dejar ver el gradiente/olas) */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1rem;
+  overflow: hidden;
+  background: transparent;
+  z-index: 1; /* por encima de las olas */
+}
+
+/* Card cristalina (glass) */
+.login-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  outline: 1px solid rgba(124, 58, 237, 0.08);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(124, 58, 237, 0.04);
+  animation: fadeInUp 0.35s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.login-header { text-align: center; margin-bottom: 1rem; }
+.login-header h2 {
+  color: var(--login-primary);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.3px;
+}
+.login-header h3 {
+  color: var(--text-primary);
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+}
+.login-header p { color: var(--text-secondary); font-size: 0.92rem; margin: 0; }
+
+/* Formulario */
+.login-form { display: flex; flex-direction: column; gap: 0.85rem; }
+
+/* Campo (sincronizamos fondo y grosor del borde; offset del label flotante) */
+.form-field {
+  position: relative;
+  --field-bg: rgba(255, 255, 255, 0.66);
+  --bw: 1.4px;                  /* grosor del borde del input */
+  --label-float-offset: 0.95rem;/* cuánto sube el label (ajusta 0.85–1.05rem) */
+}
+.form-field:focus-within { --field-bg: rgba(255, 255, 255, 0.9); }
+
+/* Input base */
+.form-input {
+  width: 100%;
+  height: 44px;
+  padding: 0.85rem 0.9rem 0.4rem 0.9rem;
+  border: var(--bw) solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--field-bg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* Oculta placeholder cuando está vacío (para usar :placeholder-shown) */
+.form-input::placeholder { color: transparent; }
+
+/* Focus visual (no tocar background para mantener consistencia visual) */
+.form-input:focus {
+  outline: none;
+  border-color: var(--login-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.14);
+}
+
+/* Label centrado por defecto (sin fondo) */
+.form-label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  background: transparent;  /* nunca pintamos fondo */
+  padding: 0;               /* sin padding ni caja */
+  pointer-events: none;
+  z-index: 3;               /* sobre el input/borde */
+  display: inline-block;    /* ancho = texto */
+  line-height: 1.1;
+  transition:
+    top 0.18s ease,
+    transform 0.18s ease,
+    font-size 0.18s ease,
+    color 0.18s ease;
+}
+
+/* Flotación: sube por ENCIMA del borde, sin fondo ni notch */
+.form-field:focus-within .form-label,
+.form-input:not(:placeholder-shown) + .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label,
+.form-input:-webkit-autofill + .form-label,
+.form-input:-webkit-autofill ~ .form-label {
+  top: calc(-1 * var(--label-float-offset) - var(--bw));  /* arriba del borde */
+  transform: none;
+  font-size: 0.82rem;
+  color: var(--login-primary);
+}
+
+/* Errores */
+.form-field.has-error .form-input {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+.form-field.has-error .form-label {
+  color: #ef4444;
+}
+.input-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: #ef4444;
+}
+
+/* Toggle mostrar/ocultar contraseña */
+.password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 32px;
+  width: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  z-index: 2; /* por debajo del label (z-index:3), pero sobre el input */
+}
+.password-toggle:hover { background: rgba(124, 58, 237, 0.08); color: var(--login-primary); }
+.password-toggle:active { transform: translateY(calc(-50% + 1px)); }
+
+/* Opciones */
+.form-options {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.15rem;
+  flex-wrap: nowrap;
+}
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+}
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--login-primary);
+}
+.form-options .forgot {
+  margin-left: auto;
+  white-space: nowrap;
+  font-size: 0.86rem;
+  color: var(--login-primary);
+}
+
+/* Botón principal */
+.login-btn {
+  width: 100%;
+  height: 46px !important;
+  border: none !important;
+  border-radius: var(--radius) !important;
+  background: linear-gradient(135deg, var(--login-primary) 0%, var(--login-primary-dark) 100%) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 0.98rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0.5rem;
+  box-shadow: 0 12px 28px -14px rgba(124, 58, 237, 0.55);
+}
+.login-btn:hover:not(:disabled) {
+  box-shadow:
+    0 16px 32px -16px rgba(124, 58, 237, 0.6),
+    0 0 0 2px rgba(124, 58, 237, 0.08) inset;
+}
+
+/* Google Login Button */
+.google-login-btn {
+  width: 100%;
+  height: 46px;
+  border: 1.4px solid var(--border-color);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.1);
+}
+.google-login-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: #dadce0;
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+.google-login-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer, divisor y volver al inicio */
+.login-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1rem 0;
+}
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+.login-divider span {
+  padding: 0 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.login-footer {
+  text-align: center;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+.login-footer p { margin: 0; color: var(--text-secondary); font-size: 0.9rem; }
+
+.login-back { text-align: center; margin-top: 0.6rem; }
+.login-back .link-text { color: var(--text-muted); }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card { padding: 1.05rem; max-width: 92vw; }
+  .login-header h2 { font-size: 1.6rem; }
+  .login-header h3 { font-size: 1.02rem; }
+  .form-options .forgot { font-size: 0.82rem; }
+}
+
+/* === Ajuste: bajar un poco SOLO el campo de contraseña === */
+
+/* Fallback sin :has -> aplica al segundo .form-field (asumiendo orden email -> contraseña) */
+@supports not selector(:has(*)) {
+  .login-form .form-field:nth-of-type(2) {
+    margin-top: 0.35rem; /* ajusta 0.25–0.5rem */
+  }
+}
+
+/* Preciso con :has -> exactamente el campo que contiene el input password */
+@supports selector(:has(*)) {
+  .login-form .form-field:has(> input[type="password"]) {
+    margin-top: 0.35rem; /* ajusta 0.25–0.5rem */
+  }
+}
+
+/* ========= Fondo animado con gradiente + olas (solo en esta página) ========= */
+body.has-animated-bg {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden; /* evita scroll horizontal por width:200% de .wave */
+  background: linear-gradient(
+    315deg,
+    rgba(101, 0, 94, 1) 3%,
+    rgba(60, 132, 206, 1) 38%,
+    rgba(48, 238, 226, 1) 68%,
+    rgba(255, 25, 25, 1) 98%
+  );
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  animation: login-gradient 15s ease infinite;
+}
+
+@keyframes login-gradient {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Olas (por debajo del contenido) */
+.waves {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* contenido va por encima */
+}
+.wave {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 12em;
+  background: rgb(255 255 255 / 25%);
+  border-radius: 1000% 1000% 0 0;
+  opacity: 0.8;
+  transform: translate3d(0, 0, 0);
+  animation: wave-h 10s -3s linear infinite;
+  will-change: transform;
+}
+.wave:nth-of-type(2) {
+  bottom: -1.25em;
+  animation: wave-h 18s linear reverse infinite;
+  opacity: 0.8;
+}
+.wave:nth-of-type(3) {
+  bottom: -2.5em;
+  animation: wave-h 20s -1s reverse infinite;
+  opacity: 0.9;
+}
+@keyframes wave-h {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-25%); }
+  50%  { transform: translateX(-50%); }
+  75%  { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
+/* Accesibilidad: reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  body.has-animated-bg,
+  .wave { animation: none !important; }
+}
+
+/* Móvil: más fluido sin background-attachment: fixed */
+@media (max-width: 767px) {
+  body.has-animated-bg { background-attachment: scroll; }
+}

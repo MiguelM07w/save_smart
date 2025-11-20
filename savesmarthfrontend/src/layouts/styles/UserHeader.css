@@ -1,0 +1,257 @@
+/* ==================== HEADER (Glass) ==================== */
+.user-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid rgba(231, 234, 240, 0.8);
+  box-shadow: var(--shadow-xs);
+}
+
+.user-header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 1.5rem;
+}
+
+/* Logo */
+.header-left { display: flex; align-items: center; }
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.logo-link:hover { opacity: 0.85; }
+.header-logo { width: 140px; height: auto; }
+
+/* ==================== NAVEGACIÓN ==================== */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  justify-content: center;
+  padding-bottom: 4px;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+.nav-link:hover {
+  background: rgba(124, 58, 237, 0.06);
+  color: var(--brand-purple);
+}
+
+/* Activo: color + subrayado degradado animado */
+.nav-link.active,
+.nav-link[aria-current="page"] {
+  color: var(--brand-purple);
+  background: transparent;
+}
+
+/* Indicator animado (hover/active) */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--brand-purple, #7c3aed) 0%, var(--brand-blue, #3b82f6) 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 180ms ease;
+  pointer-events: none;
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+.nav-link.active::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+  height: 3px; /* un poco más grueso en activo */
+}
+
+/* Focus visible accesible (teclado) */
+.nav-link:focus-visible {
+  outline: none;
+  background: rgba(124, 58, 237, 0.06);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.18);
+  border-radius: var(--radius, 12px);
+}
+
+/* Íconos inline (heredan color) */
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+}
+.nav-icon svg { width: 100%; height: 100%; display: block; }
+
+/* ==================== USER MENU (Glass, sutil) ==================== */
+.header-right { display: flex; align-items: center; gap: 0.75rem; }
+.user-menu-wrapper { position: relative; }
+
+.user-menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(231, 234, 240, 0.9);
+  color: var(--text-gray);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+.user-menu-button:hover {
+  border-color: rgba(124, 58, 237, 0.45);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-dark);
+}
+.user-menu-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.18);
+  border-radius: 12px;
+}
+
+.user-avatar-small {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-blue) 100%);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+
+.user-avatar-small .avatar-image-small {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Flecha del dropdown (rotación al abrir) */
+.dropdown-arrow {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease, color 0.2s ease;
+  color: var(--text-muted);
+}
+.user-menu-button:hover .dropdown-arrow { color: var(--brand-purple); }
+.user-menu-button[aria-expanded="true"] .dropdown-arrow { transform: rotate(180deg); }
+
+.user-name-header { color: var(--text-dark); font-weight: 600; }
+
+/* ==================== BOTÓN HAMBURGUESA ==================== */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(231,234,240,0.9);
+  color: var(--text-gray);
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, color .2s ease, background-color .2s ease;
+}
+.nav-toggle:hover {
+  border-color: rgba(124, 58, 237, 0.45);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-dark);
+}
+.nav-toggle .icon { display: block; }
+.nav-toggle .icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-menu { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+/* Backdrop (debajo del panel, encima del contenido) */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 9;
+}
+.menu-open .nav-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav-backdrop[hidden] { display: none; }
+
+/* Accesibilidad */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* Altura header como variable */
+:root { --header-h: 68px; }
+
+/* Reduce-motion: desactiva animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after,
+  .dropdown-arrow {
+    transition: none;
+  }
+}
+
+
+
+
+/* 1) Botón con ancho fijo: no crece/encoge con el nombre */
+.user-menu-button {
+  width: 165px;          /* ajusta a tu gusto */
+  flex: 0 0 220px;       /* asegura que no cambie en contenedores flex */
+  box-sizing: border-box;/* incluye padding/borde en el ancho fijo */
+}
+
+/* 2) Avatar y flecha son fijos, el nombre ocupa el espacio central */
+.user-avatar-small,
+.dropdown-arrow {
+  flex: 0 0 auto; /* no se encogen */
+}
+
+.user-name-header {
+  /* IMPORTANTE: quitar cualquier max-width anterior aquí */
+  flex: 1 1 auto;     /* ocupa el espacio disponible entre avatar y flecha */
+  min-width: 0;       /* necesario para que funcione text-overflow en flex */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

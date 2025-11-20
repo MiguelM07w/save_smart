@@ -1,0 +1,393 @@
+/* ==================== USER STATS PAGE ==================== */
+.user-stats {
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ==================== HEADER ==================== */
+.stats-header {
+  margin-bottom: 2rem;
+}
+
+.stats-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.stats-header p {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+/* ==================== PERIOD FILTERS ==================== */
+.period-filters {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.75rem 1.5rem;
+  background: #1a1a24;
+  border: 1px solid #2a2a3a;
+  border-radius: 0.5rem;
+  color: #d1d5db;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  border-color: #3a3a4a;
+  background: #1f1f2a;
+}
+
+.filter-btn.active {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+}
+
+/* ==================== EXPORT ACTIONS ==================== */
+.export-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.export-btn {
+  padding: 0.75rem 1.25rem;
+  border: 1px solid #2a2a3a;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pdf-btn {
+  background: #1a1a24;
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+.pdf-btn:hover {
+  background: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.3);
+}
+
+.csv-btn {
+  background: #1a1a24;
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.2);
+}
+
+.csv-btn:hover {
+  background: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* ==================== SUMMARY STATS ==================== */
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-stat {
+  background: #1a1a24;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  border: 1px solid #2a2a3a;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.stat-value {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.stat-period {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Income Stat */
+.income-stat {
+  border-left: 3px solid #10b981;
+}
+
+.income-stat .stat-icon {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+.income-stat .stat-value {
+  color: #10b981;
+}
+
+/* Expense Stat */
+.expense-stat {
+  border-left: 3px solid #ec4899;
+}
+
+.expense-stat .stat-icon {
+  background: rgba(236, 72, 153, 0.08);
+  border-color: rgba(236, 72, 153, 0.15);
+}
+
+.expense-stat .stat-value {
+  color: #ec4899;
+}
+
+/* Balance Stat */
+.balance-stat.positive {
+  border-left: 3px solid #3b82f6;
+}
+
+.balance-stat.positive .stat-icon {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.15);
+}
+
+.balance-stat.positive .stat-value {
+  color: #3b82f6;
+}
+
+.balance-stat.negative {
+  border-left: 3px solid #ef4444;
+}
+
+.balance-stat.negative .stat-icon {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+.balance-stat.negative .stat-value {
+  color: #ef4444;
+}
+
+/* ==================== CHARTS GRID ==================== */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card {
+  background: #1a1a24;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid #2a2a3a;
+}
+
+.chart-card h3 {
+  margin: 0 0 1.25rem 0;
+  color: #f9fafb;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.chart-card.full-width {
+  grid-column: span 2;
+}
+
+/* ==================== CATEGORY DETAILS ==================== */
+.category-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.category-section {
+  background: #1a1a24;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid #2a2a3a;
+}
+
+.category-section h3 {
+  margin: 0 0 1.25rem 0;
+  color: #f9fafb;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem;
+  background: #15151f;
+  border-radius: 0.5rem;
+  border: 1px solid #2a2a3a;
+  transition: border-color 0.2s ease;
+}
+
+.category-item:hover {
+  border-color: #3a3a4a;
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.category-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.category-name {
+  color: #d1d5db;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.category-amount {
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card.full-width {
+    grid-column: span 1;
+  }
+
+  .category-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-stats {
+    padding: 1rem;
+  }
+
+  .stats-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .period-filters {
+    gap: 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .export-actions {
+    gap: 0.5rem;
+  }
+
+  .export-btn {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .stats-summary {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .summary-stat {
+    padding: 1.25rem;
+  }
+
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .chart-card {
+    padding: 1.25rem;
+  }
+
+  .category-section {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .stats-header p {
+    font-size: 0.9rem;
+  }
+
+  .filter-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .export-btn {
+    flex: 1;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,62 @@
+/* ==================== FONDO ANIMADO "SLIDING DIAGONALS" ==================== */
+
+.user-layout {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--bg-light);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Capas del fondo animado (prefijo ul- para evitar colisiones) */
+.ul-bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: -50%;
+  right: -50%;
+  background-image: linear-gradient(-60deg, rgba(213, 151, 249, 0.741) 50%, rgb(210, 65, 255) 50%);
+  opacity: .5;
+  animation: ul-slide 3s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0; /* el contenido irá por encima con z-index:1 */
+}
+
+.ul-bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
+}
+
+.ul-bg3 {
+  animation-duration: 5s;
+}
+
+/* Contenedor del contenido por encima del fondo */
+.user-layout-content {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes ul-slide {
+  0%   { transform: translateX(-25%); }
+  100% { transform: translateX(25%); }
+}
+
+/* Respeta reduce-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ul-bg, .ul-bg2, .ul-bg3 {
+    animation: none !important;
+  }
+}
+
+/* ==================== MAIN CONTENT ==================== */
+.user-main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1; /* por encima del fondo animado */
+}

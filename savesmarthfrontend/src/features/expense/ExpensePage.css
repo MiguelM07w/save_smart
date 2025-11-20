@@ -1,0 +1,174 @@
+/* ==================== EXPENSE PAGE - ISOLATED STYLES ==================== */
+.expense-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ==================== HEADER ==================== */
+.expense-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.expense-page .page-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  color: #2d3748;
+}
+
+.expense-page .page-header p {
+  color: #718096;
+  margin: 0;
+}
+
+/* ==================== CARDS ==================== */
+.expense-page .card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  margin-bottom: 1.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* ==================== SEARCH BAR ==================== */
+.expense-page .search-bar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.expense-page .search-bar .input {
+  flex: 1;
+  background: #ffffff;
+  color: #2d3748;
+  border: 1px solid #cbd5e0;
+}
+
+.expense-page .search-bar .input::placeholder {
+  color: #a0aec0;
+}
+
+/* ==================== TABLE ==================== */
+.expense-page .table-container {
+  overflow-x: auto;
+  background: #ffffff;
+}
+
+.expense-page .table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.expense-page .table thead {
+  background: #f7fafc;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.expense-page .table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #f7fafc;
+}
+
+.expense-page .table tbody {
+  background: #ffffff;
+}
+
+.expense-page .table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #2d3748;
+  font-size: 0.95rem;
+  background: #ffffff;
+}
+
+.expense-page .table tbody tr {
+  background: #ffffff;
+  transition: background-color 0.2s ease;
+}
+
+.expense-page .table tbody tr:hover {
+  background: #f7fafc;
+}
+
+/* ==================== ACTION BUTTONS ==================== */
+.expense-page .action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.expense-page .btn {
+  background: #ffffff;
+  color: #2d3748;
+  border: 1px solid #cbd5e0;
+}
+
+.expense-page .btn:hover {
+  background: #f7fafc;
+  border-color: #a0aec0;
+}
+
+.expense-page .btn-outline {
+  background: #ffffff;
+  color: #4299e1;
+  border: 1px solid #4299e1;
+}
+
+.expense-page .btn-outline:hover {
+  background: #ebf8ff;
+}
+
+.expense-page .btn-danger {
+  background: #fff5f5;
+  color: #e53e3e;
+  border: 1px solid #fc8181;
+}
+
+.expense-page .btn-danger:hover {
+  background: #fed7d7;
+}
+
+/* ==================== PAGINATION ==================== */
+.expense-page .pagination {
+  padding: 1rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+}
+
+.expense-page .pagination p {
+  margin: 0;
+  color: #718096;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .expense-page .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .expense-page .search-bar {
+    flex-direction: column;
+  }
+
+  .expense-page .search-bar .input {
+    width: 100%;
+  }
+
+  .expense-page .table-container {
+    overflow-x: auto;
+  }
+}

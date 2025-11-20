@@ -1,0 +1,35 @@
+/* ==================== VARIABLES (alineadas con Login/Register) ==================== */
+:root {
+  /* Marca (usa las de login si existen, si no, fallbacks) */
+  --brand-purple: var(--login-primary, #7c3aed);
+  --brand-purple-dark: var(--login-primary-dark, #6d28d9);
+  --brand-blue: var(--login-accent, #3b82f6);
+
+  /* Compat para tus vars previas */
+  --primary-purple: var(--brand-purple);
+  --primary-blue: var(--brand-blue);
+
+  --success-green: #48bb78;
+  --info-blue: #4299e1;
+
+  --bg-light: #f7f8fb;
+  --bg-white: #ffffff;
+
+  --text-dark: #0f172a;
+  --text-gray: #475569;
+  --text-muted: #94a3b8;
+
+  --border-light: #e7eaf0;
+
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  --shadow-xs: 0 1px 3px rgba(16, 24, 40, 0.06);
+  --shadow-sm: 0 2px 8px rgba(16, 24, 40, 0.08);
+  --shadow-md: 0 6px 18px rgba(16, 24, 40, 0.12);
+  --shadow-lg: 0 12px 30px rgba(16, 24, 40, 0.14);
+}
+
+/* Los módulos CSS se importan directamente en UserLayout.tsx */
+
+

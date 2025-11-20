@@ -1,0 +1,354 @@
+/* =========================================
+   Register - Fondo gradiente animado + olas
+   ========================================= */
+
+/* Variables (idénticas al login para coherencia visual) */
+:root {
+  --login-primary: #7c3aed;
+  --login-primary-dark: #6d28d9;
+  --login-accent: #3b82f6;
+
+  --purple-rgb: 124, 58, 237;
+  --blue-rgb: 59, 130, 246;
+
+  --bg: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --border-color: #e2e8f0;
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  --shadow-lg: 0 18px 40px -20px rgba(16, 24, 40, 0.4);
+
+  /* Ajustes del toggle/ícono (sólo referencia; el scope está bajo .register-form) */
+  --toggle-size: 32px;
+  --toggle-gap: 8px;
+}
+
+*, ::before, ::after { box-sizing: border-box; }
+
+/* Contenedor sin fondos (deja ver el gradiente/olas) */
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1rem;
+  overflow: hidden;
+  background: transparent; /* antes era var(--bg) */
+  z-index: 1;              /* por encima de las olas */
+}
+
+/* Eliminar radiales antiguos */
+.register-container::before,
+.register-container::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Card cristalina (glass) */
+.register-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 520px; /* un poco más ancha que login */
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  outline: 1px solid rgba(124, 58, 237, 0.08);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(124, 58, 237, 0.04);
+  animation: fadeInUp 0.35s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.register-header { text-align: center; margin-bottom: 1rem; }
+.register-header h2 {
+  color: var(--login-primary);
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.3px;
+}
+.register-header h3 {
+  color: var(--text-primary);
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+}
+.register-header p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+/* Formulario */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* Inputs (aplica al Input genérico renderizado) */
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
+  width: 100%;
+  height: 44px;
+  padding: 0.75rem 0.9rem;
+  border: 1.4px solid var(--border-color) !important;
+  border-radius: var(--radius) !important;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.66) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.register-form input:focus {
+  outline: none;
+  border-color: var(--login-primary) !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.14);
+  background: rgba(255,255,255,0.9) !important;
+}
+
+/* Grid para contraseña / confirmar */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+@media (max-width: 560px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+/* Checkbox de términos en un solo renglón */
+.terms-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  user-select: none;
+}
+.terms-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--login-primary);
+}
+.terms-checkbox label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.92rem;
+}
+.terms-checkbox .link-text {
+  color: var(--login-primary);
+  text-decoration: none;
+}
+.terms-checkbox .link-text:hover { text-decoration: underline; }
+
+/* Botón principal */
+.register-btn {
+  width: 100%;
+  height: 46px !important;
+  border: none !important;
+  border-radius: var(--radius) !important;
+  background: linear-gradient(135deg, var(--login-primary) 0%, var(--login-primary-dark) 100%) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 0.98rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0.5rem;
+  box-shadow: 0 12px 28px -14px rgba(124, 58, 237, 0.55);
+}
+.register-btn:hover:not(:disabled) {
+  box-shadow:
+    0 16px 32px -16px rgba(124, 58, 237, 0.6),
+    0 0 0 2px rgba(124, 58, 237, 0.08) inset;
+}
+
+/* Enlaces y estilos comunes */
+.link-text {
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: var(--login-primary);
+  transition: opacity 0.2s ease, text-decoration-color 0.2s ease;
+}
+.link-text:hover { opacity: 0.88; text-decoration: underline; text-decoration-color: currentColor; }
+.link-primary { color: var(--login-primary); font-weight: 600; text-decoration: none; }
+.link-primary:hover { text-decoration: underline; }
+
+/* Footer y divisor */
+.register-footer {
+  text-align: center;
+  margin-top: 0.1rem;
+  padding-top: 0.1rem;
+  border-top: 1px solid var(--border-color);
+}
+.register-footer p { margin: 0; color: var(--text-secondary); font-size: 0.9rem; }
+
+.register-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1rem 0;
+}
+.register-divider::before,
+.register-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+.register-divider span {
+  padding: 0 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* "Volver al inicio" centrado */
+.register-back {
+  text-align: center;
+  margin-top: 0.6rem;
+}
+.register-back .link-text { color: var(--text-muted); }
+
+/* Responsive pequeños ajustes */
+@media (max-width: 480px) {
+  .register-card { padding: 1.05rem; max-width: 92vw; }
+  .register-header h1 { font-size: 1.6rem; }
+  .register-header h2 { font-size: 1.02rem; }
+  .terms-checkbox label { font-size: 0.86rem; }
+}
+
+/* ================================
+   FIX: Alineación exacta del ícono en Register
+   (scoped para NO afectar al Login)
+   ================================ */
+
+/* Wrapper del input de Register */
+.register-form .input-wrapper {
+  position: relative;         /* referencia para el toggle absoluto */
+  display: block;
+}
+
+/* Reserva espacio a la derecha del input para el toggle */
+.register-form .input-wrapper > input {
+  padding-right: calc(var(--toggle-size) + var(--toggle-gap) + 6px) !important;
+}
+
+/* Toggle centrado verticalmente respecto al alto del input */
+.register-form .password-toggle {
+  position: absolute;
+  right: var(--toggle-gap);
+  top: calc(50% + 5px);
+  transform: translateY(-50%);
+  width: var(--toggle-size);
+  height: var(--toggle-size);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+/* Evita desalineación por baseline del SVG */
+.register-form .password-toggle svg { display: block; }
+
+.register-form .password-toggle:hover {
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--login-primary);
+}
+.register-form .password-toggle:active { transform: translateY(calc(-50% + 1px)); }
+
+/* ========= Fondo animado con gradiente + olas (solo en esta página) ========= */
+body.has-animated-bg {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden; /* evita scroll horizontal por width:200% de .wave */
+  background: linear-gradient(
+    315deg,
+    rgba(101, 0, 94, 1) 3%,
+    rgba(60, 132, 206, 1) 38%,
+    rgba(48, 238, 226, 1) 68%,
+    rgba(255, 25, 25, 1) 98%
+  );
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  animation: login-gradient 15s ease infinite;
+}
+
+@keyframes login-gradient {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Olas (por debajo del contenido) */
+.waves {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* contenido va por encima */
+}
+.wave {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 12em;
+  background: rgb(255 255 255 / 25%);
+  border-radius: 1000% 1000% 0 0;
+  opacity: 0.8;
+  transform: translate3d(0, 0, 0);
+  animation: wave-h 10s -3s linear infinite;
+  will-change: transform;
+}
+.wave:nth-of-type(2) {
+  bottom: -1.25em;
+  animation: wave-h 18s linear reverse infinite;
+  opacity: 0.8;
+}
+.wave:nth-of-type(3) {
+  bottom: -2.5em;
+  animation: wave-h 20s -1s reverse infinite;
+  opacity: 0.9;
+}
+
+@keyframes wave-h {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-25%); }
+  50%  { transform: translateX(-50%); }
+  75%  { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
+/* Accesibilidad: reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  body.has-animated-bg,
+  .wave { animation: none !important; }
+}
+
+/* Móvil: más fluido sin background-attachment: fixed */
+@media (max-width: 767px) {
+  body.has-animated-bg { background-attachment: scroll; }
+}

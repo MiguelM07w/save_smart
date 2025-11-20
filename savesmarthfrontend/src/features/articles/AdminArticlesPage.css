@@ -1,0 +1,196 @@
+/* ==================== ADMIN ARTICLES PAGE ==================== */
+.admin-articles-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Reuse shared styles from AdminVideosPage.css */
+.admin-articles-page .page-header,
+.admin-articles-page .search-section,
+.admin-articles-page .table-container,
+.admin-articles-page .empty-state,
+.admin-articles-page .section-title,
+.admin-articles-page .loading {
+  /* Same as AdminVideosPage.css */
+}
+
+/* ==================== ARTICLE SPECIFIC ==================== */
+.article-preview {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+}
+
+.article-preview-placeholder {
+  width: 120px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 6px;
+  font-size: 2.5rem;
+  border: 1px solid #dee2e6;
+}
+
+.article-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 400px;
+}
+
+.article-cell strong {
+  color: #212529;
+  font-size: 0.95rem;
+}
+
+.article-cell small {
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.article-cell .excerpt {
+  color: #868e96;
+  font-style: italic;
+}
+
+/* ==================== TABLE ==================== */
+.articles-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.articles-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+
+.articles-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.articles-table tbody tr {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.2s ease;
+}
+
+.articles-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.articles-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.articles-table td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+/* ==================== ARTICLE FORM MODAL ==================== */
+.article-form-modal {
+  max-width: 900px;
+}
+
+.content-textarea {
+  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  min-height: 300px;
+}
+
+.file-input {
+  padding: 0.5rem;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-input:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.image-preview {
+  margin-top: 1rem;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.remove-image {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(239, 68, 68, 0.9);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-image:hover {
+  background: #ef4444;
+  transform: scale(1.05);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+  .articles-table {
+    font-size: 0.9rem;
+  }
+
+  .article-preview,
+  .article-preview-placeholder {
+    width: 100px;
+    height: 75px;
+  }
+
+  .article-form-modal {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-articles-page {
+    padding: 1rem;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .articles-table {
+    min-width: 900px;
+  }
+
+  .article-cell {
+    max-width: 250px;
+  }
+
+  .content-textarea {
+    min-height: 200px;
+    font-size: 0.85rem;
+  }
+}
