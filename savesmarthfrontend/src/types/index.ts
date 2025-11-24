@@ -416,3 +416,21 @@ export interface Article {
   updatedAt?: Date | string;
   deletedAt?: Date | string | null;
 }
+
+// News Interface (from NewsAPI)
+export interface NewsArticle {
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+  source: string;
+  author: string | null;
+}
+
+export interface NewsResponse {
+  articles: NewsArticle[];
+  totalResults: number;
+  page?: number;
+  pageSize?: number;
+}

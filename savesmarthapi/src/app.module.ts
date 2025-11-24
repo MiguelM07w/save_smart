@@ -11,6 +11,7 @@ import { IncomeModule } from './income/income.module';
 import { ExpenseModule } from './expense/expense.module';
 import { VideoModule } from './video/video.module';
 import { ArticleModule } from './article/article.module';
+import { NewsModule } from './news/news.module';
 
 
 @Module({
@@ -37,6 +38,7 @@ import { ArticleModule } from './article/article.module';
     ExpenseModule,
     VideoModule,
     ArticleModule,
+    NewsModule,
      ],
   providers: [],
 })

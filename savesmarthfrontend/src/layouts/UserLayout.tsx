@@ -118,6 +118,16 @@ const IconNewspaper: React.FC<IconProps> = ({ size = 20, className }) => (
   </svg>
 );
 
+const IconGlobe: React.FC<IconProps> = ({ size = 20, className }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    className={className} aria-hidden="true">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
+
 const IconMenu: React.FC<IconProps> = ({ size = 24, className }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -272,6 +282,10 @@ const UserLayout: React.FC = () => {
               <NavLink to="/user/news" className="nav-link">
                 <span className="nav-icon"><IconNewspaper /></span>
                 <span>Noticias</span>
+              </NavLink>
+              <NavLink to="/user/external-news" className="nav-link">
+                <span className="nav-icon"><IconGlobe /></span>
+                <span>Noticias Externas</span>
               </NavLink>
               <NavLink to="/user/payments" className="nav-link">
                 <span className="nav-icon">💳</span>

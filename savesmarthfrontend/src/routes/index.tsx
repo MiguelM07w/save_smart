@@ -31,6 +31,7 @@ import UserCharts from '../pages/user/UserCharts';
 import UserDashboard from '../pages/user/UserDashboard';
 import UserLearn from '../features/learn/UserLearn';
 import UserNews from '../features/news/UserNews';
+import NewsPage from '../pages/user/NewsPage';
 import UserPayments from '../features/payments/UserPayments';
 import UserProfile from '../pages/user/UserProfile';
 
@@ -121,6 +122,7 @@ const AppRoutes: React.FC = () => {
         <Route path="dashboard" element={<UserDashboard />} />
         <Route path="learn" element={<UserLearn />} />
         <Route path="news" element={<UserNews />} />
+        <Route path="external-news" element={<NewsPage />} />
         <Route path="payments" element={<UserPayments />} />
         <Route path="profile" element={<UserProfile />} />
         <Route path="settings" element={<UserProfile />} />

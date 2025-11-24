@@ -17,6 +17,7 @@ import type {
   RegisterRequest,
   Video,
   Article,
+  NewsResponse,
 } from '../types';
 
 // ==================== AUTH API ====================
@@ -771,6 +772,36 @@ export const articlesApi = {
   },
 };
 
+// ==================== NEWS API ====================
+/**
+ * Servicios para obtener noticias financieras desde NewsAPI
+ */
+export const newsApi = {
+  /**
+   * Obtener noticias financieras
+   */
+  getFinancialNews: async (page = 1, pageSize = 10) => {
+    const response = await axiosInstance.get<NewsResponse>(`/news/financial?page=${page}&pageSize=${pageSize}`);
+    return response.data;
+  },
+
+  /**
+   * Obtener noticias de negocios
+   */
+  getBusinessNews: async (country = 'mx', pageSize = 10) => {
+    const response = await axiosInstance.get<NewsResponse>(`/news/business?country=${country}&pageSize=${pageSize}`);
+    return response.data;
+  },
+
+  /**
+   * Buscar noticias por query
+   */
+  searchNews: async (query: string, page = 1, pageSize = 10) => {
+    const response = await axiosInstance.get<NewsResponse>(`/news/search?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}`);
+    return response.data;
+  },
+};
+
 /**
  * Exportación principal que agrupa todos los servicios API
  * Facilita la importación y uso en los componentes
@@ -797,4 +828,5 @@ export default {
   expense: expenseApi,
   videos: videosApi,
   articles: articlesApi,
+  news: newsApi,
 };
